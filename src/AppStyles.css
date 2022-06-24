@@ -4,6 +4,7 @@
   padding: 0;
   color: white;
   font-family: "Poppins", sans-serif;
+  transition: all 0.5s;
 }
 
 body {
@@ -34,7 +35,7 @@ body {
   border-radius: 20px;
 }
 .weather-info {
-  height: 200px;
+  height: 110px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -46,8 +47,93 @@ body {
   background-color: rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   padding: 5px;
+  font-size: 1.5rem;
+  border: 5px solid transparent;
+  outline: none;
+}
+
+.weather-card input:focus {
+  animation: inputActive 0.75s 1 forwards;
+}
+
+@keyframes inputActive {
+  50% {
+    border-left: 5px solid white;
+    border-right: 5px solid white;
+    border-top: 5px solid white;
+  }
+  100% {
+    border-bottom: 5px solid white;
+  }
 }
 
 #temperature {
   font-size: 4rem;
+  transition: all 0.5s;
+}
+#temperature:hover,
+#pressure:hover,
+#weather:hover {
+  animation: infoHover 1s 1 forwards;
+}
+@keyframes infoHover {
+  0% {
+    transform: translate(0px);
+  }
+  50% {
+    transform: translate(0px, -10px);
+  }
+  100% {
+    transform: translate(0px);
+  }
+}
+
+#city {
+  font-size: 3rem;
+  background: -webkit-linear-gradient(#f093fb, #f5576c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#city:hover {
+  font-size: 3.5rem;
+}
+
+#pressure {
+  font-size: 1.85rem;
+}
+#weather {
+  font-size: 1.5rem;
+}
+
+#unit-change-info {
+  font-size: 0.5rem;
+  animation: unitChangeInfoSlideOut forwards 1s 1;
+  opacity: 0;
+}
+#temperature:hover > #unit-change-info {
+  animation: unitChangeInfoSlideIn forwards 1s 1;
+}
+
+@keyframes unitChangeInfoSlideIn {
+  0% {
+    transform: translate(-175px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+@keyframes unitChangeInfoSlideOut {
+  0% {
+    transform: translate(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-175px);
+    opacity: 0;
+  }
+}
+.top-section {
+  font-size: 1.5rem;
 }
