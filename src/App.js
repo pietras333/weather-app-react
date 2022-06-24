@@ -7,7 +7,7 @@ const App = () => {
   const [input, setInput] = useState("");
   const [apiData, setApiData] = useState([{}]);
   const [canDownloadData, setCanDownloadData] = useState(false);
-  const api = "cf38b554d9b67da4a603358cb8d511ee";
+  const api = ":)";
 
   const handleCityChange = (event) => {
     const key = event.code;
