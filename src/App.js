@@ -1,86 +1,102 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import AppStyles from "./AppStyles.css";
 import WeatherInfo from "./WeatherInfo";
 import ErrorMessage from "./ErrorMessage";
 
 const App = () => {
   const [input, setInput] = useState("");
-  const [apiData, setApiData] = useState([{}]);
-  const [canDownloadData, setCanDownloadData] = useState(false);
+  const [resData, setResData] = useState([{}]);
+  const [canDisplay, setCanDisplay] = useState(false);
+  const [isChecking, setIsChecking] = useState(false);
+  const [isPending, setIsPending] = useState(false);
   const api = "cf38b554d9b67da4a603358cb8d511ee";
 
   const handleCityChange = (event) => {
     const key = event.code;
     if (key === "Enter") {
-      if (canDownloadData) {
-        getApiData();
-        setInput("");
-        document.title = "Whats weather in " + apiData.name + "?";
-      }
+      handleAPIRequest();
+      setIsChecking(true);
+      setInput("");
     }
   };
 
-  const canDisplayData = (data) => {
-    if (Object.keys(data).length === 1) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  const getApiData = () => {
-    fetch(
+  const makeAPIRequest = () => {
+    setIsPending(true);
+    const fetched = fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${input}&units=imperial&APPID=${api}`
-    )
-      .then((res) => {
-        console.log("res ===", res);
-        if (res.ok === false) {
-          console.log("res.ok", res.ok);
-          setCanDownloadData(false);
-        } else {
-          setCanDownloadData(true);
-          return res.json();
-        }
-      })
-      .then((data) => {
-        setApiData(data);
-      });
+    ).then((res) => {
+      return res.json();
+    });
+    return fetched;
+  };
+
+  const handleAPIRequest = async () => {
+    try {
+      const response = await makeAPIRequest();
+      if (response.cod === "404") {
+        setCanDisplay(false);
+      } else {
+        setResData(response);
+        setCanDisplay(true);
+      }
+      setIsPending(false);
+    } catch (err) {
+      console.log("error ===", err);
+    }
   };
 
   const restoreToDefaults = () => {
-    setApiData([{}]);
-    setCanDownloadData(true);
+    setResData([{}]);
+    setCanDisplay(false);
+    setIsChecking(false);
+    setIsPending(false);
     setInput("");
   };
 
   return (
     <div className="App">
+      {isPending && <div className="loader"></div>}
       <div className="weather-card">
-        <div className="top-section">Check your weather!</div>
-        <input
-          type="text"
-          value={input}
-          onChange={(ev) => setInput(ev.target.value)}
-          onKeyPress={(ev) => handleCityChange(ev)}
-        />
-        {canDisplayData(apiData) && <h1 id="city">{apiData.name}</h1>}
-        {!canDownloadData && (
+        {!isPending && (
           <>
-            <ErrorMessage />
-            <button id="try-again" onClick={restoreToDefaults}>
-              Try again
-            </button>
+            <div className="top-section">Check your weather!</div>
+            <input
+              type="text"
+              value={input}
+              onChange={(ev) => setInput(ev.target.value)}
+              onKeyPress={(ev) => handleCityChange(ev)}
+            />
+            {canDisplay && isChecking && (
+              <h1 id="city" key={resData.name}>
+                {resData.name}
+              </h1>
+            )}
+
+            {!canDisplay && isChecking && (
+              <>
+                <ErrorMessage />
+                <button
+                  id="try-again"
+                  onClick={restoreToDefaults}
+                  key={resData.name}
+                >
+                  Try again
+                </button>
+              </>
+            )}
+
+            {canDisplay && isChecking && (
+              <div className="weather-info">
+                <WeatherInfo
+                  key={resData.name}
+                  temperature={resData.main.temp}
+                  pressure={resData.main.pressure}
+                  weather={resData.weather[0].description}
+                />
+              </div>
+            )}
           </>
         )}
-        <div className="weather-info">
-          {canDisplayData(apiData) && (
-            <WeatherInfo
-              temperature={apiData.main.temp}
-              pressure={apiData.main.pressure}
-              weather={apiData.weather[0].description}
-            />
-          )}
-        </div>
       </div>
     </div>
   );
