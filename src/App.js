@@ -13,7 +13,7 @@ const App = () => {
 
   const handleCityChange = (event) => {
     const key = event.code;
-    if (key === "Enter") {
+    if (key === "Enter" && input !== "") {
       handleAPIRequest();
       setIsChecking(true);
       setInput("");
@@ -66,6 +66,7 @@ const App = () => {
               onChange={(ev) => setInput(ev.target.value)}
               onKeyPress={(ev) => handleCityChange(ev)}
             />
+
             {canDisplay && isChecking && (
               <h1 id="city" key={resData.name}>
                 {resData.name}
