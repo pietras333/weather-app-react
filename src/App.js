@@ -9,8 +9,7 @@ const App = () => {
   const [canDisplay, setCanDisplay] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
   const [isPending, setIsPending] = useState(false);
-
-  const api = ":)";
+  const api = "cf38b554d9b67da4a603358cb8d511ee";
 
   const handleCityChange = (event) => {
     const key = event.code;
