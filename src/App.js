@@ -5,17 +5,13 @@ import ErrorMessage from "./ErrorMessage";
 
 const App = () => {
   const [input, setInput] = useState("");
-<<<<<<< HEAD
   const [resData, setResData] = useState([{}]);
   const [canDisplay, setCanDisplay] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
   const [isPending, setIsPending] = useState(false);
-  const api = "cf38b554d9b67da4a603358cb8d511ee";
-=======
   const [apiData, setApiData] = useState([{}]);
   const [canDownloadData, setCanDownloadData] = useState(false);
   const api = ":)";
->>>>>>> 28e67829f531a99fb0b6dea1170e7b7e7aaa67a8
 
   const handleCityChange = (event) => {
     const key = event.code;
