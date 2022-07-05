@@ -9,8 +9,7 @@ const App = () => {
   const [canDisplay, setCanDisplay] = useState(false);
   const [isChecking, setIsChecking] = useState(false);
   const [isPending, setIsPending] = useState(false);
-  const [apiData, setApiData] = useState([{}]);
-  const [canDownloadData, setCanDownloadData] = useState(false);
+
   const api = ":)";
 
   const handleCityChange = (event) => {
