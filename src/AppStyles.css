@@ -168,3 +168,59 @@ body {
 .top-section {
   font-size: 1.5rem;
 }
+
+button {
+  width: 50%;
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  font-size: 2rem;
+  padding: 10px;
+  border: 5px solid transparent;
+  animation: buttonSlideIn forwards 1s 1;
+}
+button:hover > #btn {
+  animation: buttonHover 1s forwards;
+}
+button:hover {
+  animation: buttonSlideOut forwards 1s 1;
+}
+#btn {
+  border: 5px solid transparent;
+  border-radius: 20px;
+}
+@keyframes buttonHover {
+  0% {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  25% {
+    border-right: 5px solid #f705fe;
+  }
+  50% {
+    border-top: 5px solid #f705fe;
+  }
+  75% {
+    border-left: 5px solid #f705fe;
+    border-right: 5px solid transparent;
+  }
+  100% {
+    border-bottom: 5px solid #f705fe;
+  }
+}
+@keyframes buttonSlideOut {
+  0% {
+    transform: translate(0px);
+  }
+  100% {
+    transform: translate(15px);
+  }
+}
+
+@keyframes buttonSlideIn {
+  0% {
+    transform: translate(15px);
+  }
+  100% {
+    transform: translate(0px);
+  }
+}

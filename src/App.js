@@ -80,7 +80,7 @@ const App = () => {
                   onClick={restoreToDefaults}
                   key={resData.name}
                 >
-                  Try again
+                  <p id="btn">Try Again</p>
                 </button>
               </>
             )}
