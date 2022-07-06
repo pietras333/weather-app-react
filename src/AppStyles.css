@@ -15,212 +15,123 @@ body {
 .App {
   width: 100%;
   height: 100%;
-  background: #fc00ff; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #00dbde,
-    #fc00ff
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #00dbde,
-    #fc00ff
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-image: url(./assets/day.jpg);
+  background-size: cover;
+  display: flex;
 }
 
-.App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.left-part {
+  width: 70%;
 }
-
-.weather-card {
-  height: 300px;
-  width: 500px;
-  background-color: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(5px);
-}
-.weather-card {
-  text-align: center;
-  border-radius: 20px;
-}
-.weather-info {
-  height: 110px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-.weather-card input {
-  width: 75%;
-  height: 25px;
-  margin: 10px;
+.right-part {
+  width: 40%;
   background-color: rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-  padding: 5px;
-  font-size: 1.5rem;
-  border: 5px solid transparent;
-  outline: none;
+  backdrop-filter: blur(10px);
 }
 
-.weather-card input:focus {
-  animation: inputActive 0.75s 1 forwards;
+.left-part,
+.right-part {
+  height: 100%;
 }
 
-@keyframes inputActive {
-  50% {
-    border-left: 5px solid white;
-    border-right: 5px solid white;
-    border-top: 5px solid white;
-  }
-  100% {
-    border-bottom: 5px solid white;
-  }
+.top-part,
+.bottom-part {
+  width: 100%;
+  margin-left: 100px;
+}
+
+.top-part {
+  height: 70%;
+}
+
+.bottom-part {
+  height: 30%;
+}
+
+#company-name {
+  padding-top: 50px;
+}
+
+.weather-display {
+  background-color: transparent;
+  height: 150px;
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 #temperature {
-  font-size: 4rem;
-  transition: all 0.5s;
-}
-#temperature:hover,
-#pressure:hover,
-#weather:hover {
-  animation: infoHover 1s 1 forwards;
-}
-@keyframes infoHover {
-  0% {
-    transform: translate(0px);
-  }
-  50% {
-    transform: translate(0px, -10px);
-  }
-  100% {
-    transform: translate(0px);
-  }
-}
-
-.loader {
-  border: 16px solid #f705fe; /* Light grey */
-  border-top: 16px solid #02d9de; /* Blue */
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 1s linear infinite;
-  position: absolute;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  text-align: center;
-  z-index: 3;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  font-size: 5rem;
 }
 #city {
   font-size: 3rem;
-  background: -webkit-linear-gradient(#02d9de, #f705fe);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
-
-#pressure {
-  font-size: 1.85rem;
+#time {
+  font-size: 1rem;
 }
 #weather {
-  font-size: 1.5rem;
+  font-size: 1rem;
+}
+#weather-icon {
+  width: 60px;
+  height: 60px;
 }
 
-#unit-change-info {
-  font-size: 0.5rem;
-  animation: unitChangeInfoSlideOut forwards 1s 1;
-  opacity: 0;
+#location-input {
+  background-color: transparent;
+  color: rgba(210, 210, 210, 0.75);
+  border-bottom: 1px solid rgba(210, 210, 210, 0.75);
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 50px;
+  font-size: 1.2rem;
 }
-#temperature:hover > #unit-change-info {
-  animation: unitChangeInfoSlideIn forwards 1s 1;
-}
-
-@keyframes unitChangeInfoSlideIn {
-  0% {
-    transform: translate(-175px);
-    opacity: 0;
-  }
-  100% {
-    transform: translate(0);
-    opacity: 1;
-  }
-}
-@keyframes unitChangeInfoSlideOut {
-  0% {
-    transform: translate(0px);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-175px);
-    opacity: 0;
-  }
-}
-.top-section {
-  font-size: 1.5rem;
+#location-input:focus {
+  outline: none;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
-button {
-  width: 50%;
-  height: 100px;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 20px;
-  font-size: 2rem;
-  padding: 10px;
-  border: 5px solid transparent;
-  animation: buttonSlideIn forwards 1s 1;
-}
-button:hover > #btn {
-  animation: buttonHover 1s forwards;
-}
-button:hover {
-  animation: buttonSlideOut forwards 1s 1;
-}
-#btn {
-  border: 5px solid transparent;
-  border-radius: 20px;
-}
-@keyframes buttonHover {
-  0% {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-  25% {
-    border-right: 5px solid #f705fe;
-  }
-  50% {
-    border-top: 5px solid #f705fe;
-  }
-  75% {
-    border-left: 5px solid #f705fe;
-    border-right: 5px solid transparent;
-  }
-  100% {
-    border-bottom: 5px solid #f705fe;
-  }
-}
-@keyframes buttonSlideOut {
-  0% {
-    transform: translate(0px);
-  }
-  100% {
-    transform: translate(15px);
-  }
+.location-suggestions {
+  margin-top: 50px;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+  border-bottom: 1px solid rgba(210, 210, 210, 0.75);
 }
 
-@keyframes buttonSlideIn {
-  0% {
-    transform: translate(15px);
-  }
-  100% {
-    transform: translate(0px);
-  }
+.location-suggestions p {
+  margin-top: 25px;
+}
+.location-suggestions a {
+  all: unset;
+  color: rgba(210, 210, 210, 0.75);
+}
+#last-suggestion {
+  margin-bottom: 50px;
+}
+
+.weather-details {
+  margin-top: 50px;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+.description {
+  color: rgba(210, 210, 210, 0.75);
+}
+#header,
+.quanity {
+  font-size: 1.2rem;
+  color: white;
+}
+
+.detail {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AppStyles from "./AppStyles.css";
 import WeatherInfo from "./WeatherInfo";
 import ErrorMessage from "./ErrorMessage";
+import Cloudy from "./assets/cloudy.png";
 
 const App = () => {
   const [input, setInput] = useState("");
@@ -55,49 +56,117 @@ const App = () => {
 
   return (
     <div className="App">
-      {isPending && <div className="loader"></div>}
-      <div className="weather-card">
-        {!isPending && (
-          <>
-            <div className="top-section">Check your weather!</div>
-            <input
-              type="text"
-              value={input}
-              onChange={(ev) => setInput(ev.target.value)}
-              onKeyPress={(ev) => handleCityChange(ev)}
-            />
+      {/* LEFT PART LOCATION, DATE AND WEATHER STATUS DISPLAY */}
+      <div className="left-part">
+        <div className="top-part">
+          <p id="company-name">the.weather</p>
+        </div>
 
-            {canDisplay && isChecking && (
-              <h1 id="city" key={resData.name}>
-                {resData.name}
-              </h1>
-            )}
+        {/* LOCATION DATE AND WEATHER */}
+        <div className="bottom-part">
+          <div className="weather-display">
+            {/* TEMPERATURE */}
+            <p id="temperature">16°</p>
+            {/* LOCATION */}
+            <div className="location">
+              <p id="city">London</p>
+              {/* DATE */}
+              <p id="time">06:09 - Monday, 6 Jul '22</p>
+            </div>
+            {/* WEATHER STATUS */}
+            <div className="weather">
+              <img src={Cloudy} alt="weather-icon" id="weather-icon" />
+              <p id="weather">Cloudy</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            {!canDisplay && isChecking && (
-              <>
-                <ErrorMessage />
-                <button
-                  id="try-again"
-                  onClick={restoreToDefaults}
-                  key={resData.name}
-                >
-                  <p id="btn">Try Again</p>
-                </button>
-              </>
-            )}
-
-            {canDisplay && isChecking && (
-              <div className="weather-info">
-                <WeatherInfo
-                  key={resData.name}
-                  temperature={resData.main.temp}
-                  pressure={resData.main.pressure}
-                  weather={resData.weather[0].description}
-                />
-              </div>
-            )}
-          </>
-        )}
+      {/* RIGHT PART (WEATHER DETAILS, INPUT etc.) */}
+      <div className="right-part">
+        <div className="location-menu">
+          {/* INPUT */}
+          <input
+            type="text"
+            placeholder="Another Location"
+            id="location-input"
+          />
+          {/* LOCATION SUGGESTIONS */}
+          <div className="location-suggestions">
+            <p>
+              <a href="">Birmingham</a>
+            </p>
+            <p>
+              <a href="">Manchester</a>
+            </p>
+            <p>
+              <a href="">New York</a>
+            </p>
+            <p id="last-suggestion">
+              <a href="">California</a>
+            </p>
+          </div>
+          {/* WEATHER DETAILS */}
+          <div className="weather-details">
+            <p id="header">Weather Details</p>
+            {/* CLOUDINESS */}
+            <div className="detail">
+              <p className="description">Cloudy</p>
+              <p id="cloudy-percentage" className="quanity">
+                86%
+              </p>
+            </div>
+            {/* HUMIDITY */}
+            <div className="detail">
+              <p className="description">Humidity</p>
+              <p id="humidity-percentage" className="quanity">
+                62%
+              </p>
+            </div>
+            {/* WIND */}
+            <div className="detail">
+              <p className="description">Wind</p>
+              <p id="wind-speed" className="quanity">
+                8km/h
+              </p>
+            </div>
+            {/* PRESSURE */}
+            <div className="detail">
+              <p className="description">Pressure</p>
+              <p id="pressure-value" className="quanity">
+                1021hPa
+              </p>
+            </div>
+            {/* MIN. TEMPERATURE */}
+            <div className="detail">
+              <p className="description">Min. Temperature</p>
+              <p id="min-temp" className="quanity">
+                13°
+              </p>
+            </div>
+            {/* MAX. TEMPERATURE */}
+            <div className="detail">
+              <p className="description">Max. Temperature</p>
+              <p id="max-temp" className="quanity">
+                18°
+              </p>
+            </div>
+            {/* FEELS LIKE TEMPERETURE */}
+            <div className="detail">
+              <p className="description">Feels Like</p>
+              <p id="feels-like" className="quanity">
+                14°
+              </p>
+            </div>
+            {/* SOURCE */}
+            <div className="detail">
+              <p className="description">Source</p>
+              <p id="source" className="quanity">
+                Stations
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
