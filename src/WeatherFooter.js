@@ -1,3 +1,4 @@
+import React from "react";
 import Cloudy from "./assets/Cloudy.png";
 import Rainy from "./assets/Rainy.png";
 import Clear from "./assets/Clear.png";
