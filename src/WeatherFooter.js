@@ -6,7 +6,6 @@ import DayJPG from "./assets/day.jpg";
 import EveningJPG from "./assets/evening.jpg";
 import MorningJPG from "./assets/morning.jpg";
 import NightJPG from "./assets/night.jpg";
-import { useState } from "react";
 
 const WeatherFooter = (props) => {
   const { temperature, location, weather, date } = props;
