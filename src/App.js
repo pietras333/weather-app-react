@@ -1,27 +1,26 @@
 import { useEffect, useState } from "react";
 import AppStyles from "./AppStyles.css";
-import WeatherInfo from "./WeatherInfo";
-import ErrorMessage from "./ErrorMessage";
-import Cloudy from "./assets/cloudy.png";
+import WeatherFooter from "./WeatherFooter";
+import WeatherDetails from "./WeatherDetails";
 
 const App = () => {
-  const [input, setInput] = useState("");
-  const [resData, setResData] = useState([{}]);
+  const loadingEffect = document.getElementById("loading");
+  const [input, setInput] = useState("London");
+  const [weatherData, setWeatherData] = useState([{}]);
+  const [timeData, setTimeData] = useState([{}]);
   const [canDisplay, setCanDisplay] = useState(false);
-  const [isChecking, setIsChecking] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const api = "cf38b554d9b67da4a603358cb8d511ee";
 
-  const handleCityChange = (event) => {
+  const handleInput = (event) => {
     const key = event.code;
     if (key === "Enter" && input !== "") {
-      handleAPIRequest();
-      setIsChecking(true);
+      handleRequests();
       setInput("");
     }
   };
 
-  const makeAPIRequest = () => {
+  const getWeatherData = () => {
     setIsPending(true);
     const fetched = fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${input}&units=imperial&APPID=${api}`
@@ -31,13 +30,32 @@ const App = () => {
     return fetched;
   };
 
-  const handleAPIRequest = async () => {
+  const handleRequests = async () => {
+    // Weather data
+    let lat = 0;
+    let lon = 0;
     try {
-      const response = await makeAPIRequest();
+      const response = await getWeatherData();
       if (response.cod === "404") {
         setCanDisplay(false);
       } else {
-        setResData(response);
+        setWeatherData(response);
+        lat = response.coord.lat;
+        lon = response.coord.lon;
+        setCanDisplay(true);
+      }
+      setIsPending(false);
+    } catch (err) {
+      console.log("error ===", err);
+    }
+
+    // Time data
+    try {
+      const response = await getTimeData(lat, lon);
+      if (response.cod === "404") {
+        setCanDisplay(false);
+      } else {
+        setTimeData(response);
         setCanDisplay(true);
       }
       setIsPending(false);
@@ -46,39 +64,37 @@ const App = () => {
     }
   };
 
-  const restoreToDefaults = () => {
-    setResData([{}]);
-    setCanDisplay(false);
-    setIsChecking(false);
-    setIsPending(false);
-    setInput("");
+  const getTimeData = (lat, lon) => {
+    setIsPending(true);
+    const fetched = fetch(
+      `http://api.timezonedb.com/v2.1/get-time-zone?key=5S1STD8Y7SCE&format=json&by=position&lat=${lat}&lng=${lon}`
+    ).then((res) => {
+      return res.json();
+    });
+    return fetched;
   };
 
   return (
-    <div className="App">
+    <div className="App" id="App">
+      <div id="loading"></div>
       {/* LEFT PART LOCATION, DATE AND WEATHER STATUS DISPLAY */}
       <div className="left-part">
         <div className="top-part">
-          <p id="company-name">the.weather</p>
+          <p id="company-name">your.weather</p>
+          <p id="powered-by">Powered By Openweathermap</p>
+          <p id="heading">Check Your Weather</p>
         </div>
 
         {/* LOCATION DATE AND WEATHER */}
         <div className="bottom-part">
-          <div className="weather-display">
-            {/* TEMPERATURE */}
-            <p id="temperature">16°</p>
-            {/* LOCATION */}
-            <div className="location">
-              <p id="city">London</p>
-              {/* DATE */}
-              <p id="time">06:09 - Monday, 6 Jul '22</p>
-            </div>
-            {/* WEATHER STATUS */}
-            <div className="weather">
-              <img src={Cloudy} alt="weather-icon" id="weather-icon" />
-              <p id="weather">Cloudy</p>
-            </div>
-          </div>
+          {!isPending && canDisplay && (
+            <WeatherFooter
+              temperature={weatherData.main.temp}
+              location={weatherData.name}
+              weather={weatherData.weather[0].main}
+              date={timeData.formatted}
+            />
+          )}
         </div>
       </div>
 
@@ -90,82 +106,44 @@ const App = () => {
             type="text"
             placeholder="Another Location"
             id="location-input"
+            value={input}
+            onChange={(ev) => setInput(ev.target.value)}
+            onKeyPress={(ev) => handleInput(ev)}
           />
           {/* LOCATION SUGGESTIONS */}
           <div className="location-suggestions">
             <p>
-              <a href="">Birmingham</a>
+              <a onClick={(ev) => setInput(ev.target.textContent)}>
+                Birmingham
+              </a>
             </p>
             <p>
-              <a href="">Manchester</a>
+              <a onClick={(ev) => setInput(ev.target.textContent)}>
+                Manchester
+              </a>
             </p>
             <p>
-              <a href="">New York</a>
+              <a onClick={(ev) => setInput(ev.target.textContent)}>New York</a>
             </p>
             <p id="last-suggestion">
-              <a href="">California</a>
+              <a onClick={(ev) => setInput(ev.target.textContent)}>
+                California
+              </a>
             </p>
           </div>
           {/* WEATHER DETAILS */}
-          <div className="weather-details">
-            <p id="header">Weather Details</p>
-            {/* CLOUDINESS */}
-            <div className="detail">
-              <p className="description">Cloudy</p>
-              <p id="cloudy-percentage" className="quanity">
-                86%
-              </p>
-            </div>
-            {/* HUMIDITY */}
-            <div className="detail">
-              <p className="description">Humidity</p>
-              <p id="humidity-percentage" className="quanity">
-                62%
-              </p>
-            </div>
-            {/* WIND */}
-            <div className="detail">
-              <p className="description">Wind</p>
-              <p id="wind-speed" className="quanity">
-                8km/h
-              </p>
-            </div>
-            {/* PRESSURE */}
-            <div className="detail">
-              <p className="description">Pressure</p>
-              <p id="pressure-value" className="quanity">
-                1021hPa
-              </p>
-            </div>
-            {/* MIN. TEMPERATURE */}
-            <div className="detail">
-              <p className="description">Min. Temperature</p>
-              <p id="min-temp" className="quanity">
-                13°
-              </p>
-            </div>
-            {/* MAX. TEMPERATURE */}
-            <div className="detail">
-              <p className="description">Max. Temperature</p>
-              <p id="max-temp" className="quanity">
-                18°
-              </p>
-            </div>
-            {/* FEELS LIKE TEMPERETURE */}
-            <div className="detail">
-              <p className="description">Feels Like</p>
-              <p id="feels-like" className="quanity">
-                14°
-              </p>
-            </div>
-            {/* SOURCE */}
-            <div className="detail">
-              <p className="description">Source</p>
-              <p id="source" className="quanity">
-                Stations
-              </p>
-            </div>
-          </div>
+          {!isPending && canDisplay && (
+            <WeatherDetails
+              cloudiness={weatherData.clouds.all}
+              humidity={weatherData.main.humidity}
+              wind={weatherData.wind.speed}
+              pressure={weatherData.main.pressure}
+              minTemp={weatherData.main.temp_min}
+              maxTemp={weatherData.main.temp_max}
+              feelsLike={weatherData.main.feels_like}
+              source={weatherData.base}
+            />
+          )}
         </div>
       </div>
     </div>
