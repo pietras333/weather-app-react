@@ -5,6 +5,7 @@
   color: white;
   font-family: "Poppins", sans-serif;
   transition: all 0.5s;
+  overflow: hidden;
 }
 
 body {
@@ -15,9 +16,23 @@ body {
 .App {
   width: 100%;
   height: 100%;
-  background-image: url(./assets/day.jpg);
   background-size: cover;
+  background-color: black;
   display: flex;
+}
+
+.App {
+  background-image: url(./assets/evening.jpg);
+  animation: backgroundFadeIn 0.5s forwards;
+}
+
+@keyframes backgroundFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .left-part {
@@ -51,27 +66,39 @@ body {
 #company-name {
   padding-top: 50px;
 }
+#powered-by {
+  color: rgba(210, 210, 210, 0.75);
+}
 
 .weather-display {
   background-color: transparent;
   height: 150px;
-  width: 50%;
+  width: 65%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  overflow: hidden;
 }
 
 #temperature {
-  font-size: 5rem;
+  font-size: 6rem;
+  text-overflow: ellipsis;
+  max-width: initial;
 }
 #city {
   font-size: 3rem;
+  text-overflow: ellipsis;
+  max-width: initial;
 }
 #time {
   font-size: 1rem;
+  text-overflow: ellipsis;
+  max-width: initial;
 }
 #weather {
   font-size: 1rem;
+  text-overflow: ellipsis;
+  max-width: initial;
 }
 #weather-icon {
   width: 60px;
@@ -105,11 +132,37 @@ body {
 
 .location-suggestions p {
   margin-top: 25px;
+  animation: textSlideOut 1s forwards;
 }
 .location-suggestions a {
   all: unset;
   color: rgba(210, 210, 210, 0.75);
 }
+.location-suggestions p:hover {
+  animation: textSlideIn 0.75s forwards;
+}
+
+.location-suggestions p:hover > a {
+  color: white;
+}
+
+@keyframes textSlideIn {
+  0% {
+    transform: translate(0px);
+  }
+  100% {
+    transform: translate(15px);
+  }
+}
+@keyframes textSlideOut {
+  0% {
+    transform: translate(15px);
+  }
+  100% {
+    transform: translate(0px);
+  }
+}
+
 #last-suggestion {
   margin-bottom: 50px;
 }
@@ -134,4 +187,74 @@ body {
   display: flex;
   justify-content: space-between;
   margin-top: 25px;
+}
+
+.right-part {
+  animation: rightPartSlideIn 1s 1;
+}
+
+@keyframes rightPartSlideIn {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.weather-display {
+  animation: weatherDisplaySlideIn 1s;
+}
+
+@keyframes weatherDisplaySlideIn {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+
+#company-name {
+  animation: companyNameSlideIn 1s 1;
+}
+
+#powered-by {
+  animation: companyNameSlideIn 2s 1;
+}
+@keyframes companyNameSlideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.weather-details {
+  animation: weatherDetailsSlideIn 1s;
+}
+
+@keyframes weatherDetailsSlideIn {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+#heading {
+  margin-top: 100px;
+  font-size: 4rem;
+  -webkit-text-stroke: 1px white;
+  color: transparent;
+  animation: companyNameSlideIn 2s 1;
 }
