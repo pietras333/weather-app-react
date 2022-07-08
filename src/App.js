@@ -1,4 +1,6 @@
 import { useState } from "react";
+import React from "react";
+// eslint-disable-next-line
 import AppStyles from "./AppStyles.css";
 import WeatherFooter from "./WeatherFooter";
 import WeatherDetails from "./WeatherDetails";
@@ -111,19 +113,23 @@ const App = () => {
           {/* LOCATION SUGGESTIONS */}
           <div className="location-suggestions">
             <p>
+              {/* eslint-disable-next-line */}
               <a onClick={(ev) => setInput(ev.target.textContent)}>
                 Birmingham
               </a>
             </p>
             <p>
+              {/* eslint-disable-next-line */}
               <a onClick={(ev) => setInput(ev.target.textContent)}>
                 Manchester
               </a>
             </p>
             <p>
+              {/* eslint-disable-next-line */}
               <a onClick={(ev) => setInput(ev.target.textContent)}>New York</a>
             </p>
             <p id="last-suggestion">
+              {/* eslint-disable-next-line */}
               <a onClick={(ev) => setInput(ev.target.textContent)}>
                 California
               </a>

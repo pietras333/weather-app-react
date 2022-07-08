@@ -1,3 +1,5 @@
+import React from "react";
+
 const WeatherDetails = (props) => {
   const {
     cloudiness,
