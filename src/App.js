@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AppStyles from "./AppStyles.css";
 import WeatherFooter from "./WeatherFooter";
 import WeatherDetails from "./WeatherDetails";
 
 const App = () => {
-  const loadingEffect = document.getElementById("loading");
   const [input, setInput] = useState("London");
   const [weatherData, setWeatherData] = useState([{}]);
   const [timeData, setTimeData] = useState([{}]);
@@ -76,7 +75,6 @@ const App = () => {
 
   return (
     <div className="App" id="App">
-      <div id="loading"></div>
       {/* LEFT PART LOCATION, DATE AND WEATHER STATUS DISPLAY */}
       <div className="left-part">
         <div className="top-part">
