@@ -1,5 +1,5 @@
 import React from "react";
-import Cloudy from "./Assets/Cloudy.png";
+// import Cloudy from "./Assets/Cloudy.png";
 import Rainy from "./Assets/Rainy.png";
 import Clear from "./Assets/Clear.png";
 import Error from "./Assets/Error.png";
@@ -63,8 +63,8 @@ const WeatherFooter = (props) => {
 
   const handleWeatherIcon = () => {
     switch (weather) {
-      case "Clouds":
-        return Cloudy;
+      // case "Clouds":
+      //   // return Cloudy;
       case "Rain":
         return Rainy;
       case "Clear":
