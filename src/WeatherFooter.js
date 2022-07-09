@@ -1,12 +1,12 @@
 import React from "react";
-// import Cloudy from "./Assets/Cloudy.png";
-import Rainy from "./Assets/Rainy.png";
-import Clear from "./Assets/Clear.png";
-import Error from "./Assets/Error.png";
-import DayJPG from "./Assets/day.jpg";
-import EveningJPG from "./Assets/evening.jpg";
-import MorningJPG from "./Assets/morning.jpg";
-import NightJPG from "./Assets/night.jpg";
+const Cloudy = require("./Assets/Cloudy.png");
+const Rainy = require("./Assets/Rainy.png");
+const Clear = require("./Assets/Clear.png");
+const Error = require("./Assets/Error.png");
+const DayJPG = require("./Assets/day.jpg");
+const EveningJPG = require("./Assets/evening.jpg");
+const MorningJPG = require("./Assets/morning.jpg");
+const NightJPG = require("./Assets/night.jpg");
 
 const WeatherFooter = (props) => {
   const { temperature, location, weather, date } = props;
@@ -63,8 +63,8 @@ const WeatherFooter = (props) => {
 
   const handleWeatherIcon = () => {
     switch (weather) {
-      // case "Clouds":
-      //   // return Cloudy;
+      case "Clouds":
+        return Cloudy;
       case "Rain":
         return Rainy;
       case "Clear":
