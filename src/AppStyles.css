@@ -12,6 +12,7 @@ body {
   width: 100vw;
   height: 100vh;
 }
+
 #root,
 .App {
   width: 100%;
@@ -257,4 +258,34 @@ body {
   -webkit-text-stroke: 1px white;
   color: transparent;
   animation: companyNameSlideIn 2s 1;
+}
+
+.loading {
+  background-color: black;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  text-align: center;
+  z-index: 3;
+  display: flex;
+  animation: loading 2s linear forwards;
+}
+@keyframes loading {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+  }
 }

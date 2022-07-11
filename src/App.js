@@ -77,6 +77,8 @@ const App = () => {
 
   return (
     <div className="App" id="App">
+      {isPending && <div className="loading"></div>}
+
       {/* LEFT PART LOCATION, DATE AND WEATHER STATUS DISPLAY */}
       <div className="left-part">
         <div className="top-part">
