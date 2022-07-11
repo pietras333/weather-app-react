@@ -1,12 +1,12 @@
 import React from "react";
-import Cloudy from "./Assets/Cloudy.png";
-import Rainy from "./Assets/Rainy.png";
-import Clear from "./Assets/Clear.png";
-import Error from "./Assets/Error.png";
-import DayJPG from "./Assets/day.jpg";
-import EveningJPG from "./Assets/evening.jpg";
-import MorningJPG from "./Assets/morning.jpg";
-import NightJPG from "./Assets/night.jpg";
+import Cloudy from "./assets/Cloudy.png";
+import Rainy from "./assets/Rainy.png";
+import Clear from "./assets/Clear.png";
+import Error from "./assets/Error.png";
+import DayJPG from "./assets/day.jpg";
+import EveningJPG from "./assets/evening.jpg";
+import MorningJPG from "./assets/morning.jpg";
+import NightJPG from "./assets/night.jpg";
 
 const WeatherFooter = (props) => {
   const { temperature, location, weather, date } = props;
