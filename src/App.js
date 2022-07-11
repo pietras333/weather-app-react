@@ -84,6 +84,7 @@ const App = () => {
         <div className="top-part">
           <p id="company-name">your.weather</p>
           <p id="powered-by">Powered By Openweathermap</p>
+          <p id="powered-by">Made By Piotr Wendt</p>
           <p id="heading">Check Your Weather</p>
         </div>
 
