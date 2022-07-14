@@ -2,8 +2,8 @@ import { useState } from "react";
 import React from "react";
 // eslint-disable-next-line
 import AppStyles from "./AppStyles.css";
-import WeatherFooter from "./WeatherFooter";
-import WeatherDetails from "./WeatherDetails";
+import WeatherFooter from "./WeatherFooter.js";
+import WeatherDetails from "./WeatherDetails.js";
 
 const App = () => {
   const [input, setInput] = useState("London");
@@ -102,7 +102,7 @@ const App = () => {
       </div>
 
       {/* RIGHT PART (WEATHER DETAILS, INPUT etc.) */}
-      <div className="right-part">
+      <div className="right-part" id="right-part">
         <div className="location-menu">
           {/* INPUT */}
           <input
