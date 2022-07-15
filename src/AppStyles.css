@@ -290,9 +290,22 @@
       opacity: 0;
     }
   }
+  .mobile {
+    display: none;
+  }
+  .desktop {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color: transparent;
+  }
 }
-
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 450px) {
   * {
     border: none;
     margin: 0;
@@ -302,153 +315,224 @@
     transition: all 0.5s;
     overflow: hidden;
   }
+
   body {
     width: 100vw;
-    height: 100%;
-  }
-  .App {
-    background-image: url(./assets/evening.jpg);
-    animation: backgroundFadeIn 0.5s forwards;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  .App,
-  #root {
-    width: 100vw;
     height: 100vh;
-  }
-  .left-part {
-    width: 100%;
-    height: 50%;
-  }
-  .right-part {
-    background-color: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(15px);
-    width: 100%;
-    height: stretch;
-    margin-top: 200px;
-  }
-  #location-input {
-    width: 70%;
-    margin-left: 15%;
-    margin-right: 15%;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 1.05rem;
-    padding: 5px;
-    background-color: transparent;
-    color: rgba(210, 210, 210, 0.75);
-    outline: none;
-    border-bottom: 1px solid white;
-  }
-  #location-input:focus {
-    outline: none;
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-  }
-  .bottom-part {
-    text-align: center;
-  }
-  #temperature {
-    font-size: 5rem;
-  }
-  #weather-icon {
-    width: 15%;
-  }
-  #company-name {
-    font-size: 0.9rem;
-    text-align: end;
-    margin-right: 15px;
-  }
-  #powered-by {
-    color: rgba(210, 210, 210, 0.75);
-    text-align: end;
-    margin-right: 15px;
-    font-size: 0.75rem;
-  }
-  #heading {
-    font-size: 2.25rem;
-    -webkit-text-stroke: 1px white;
-    color: transparent;
-    margin-left: 15px;
-  }
-  .location-suggestions {
-    border-bottom: 1px solid white;
-    width: 70%;
-    margin-right: 15%;
-    margin-left: 15%;
-    padding: 15px;
-  }
-  .location-suggestions p {
-    margin-top: 5px;
-  }
-  .location-suggestions p:hover {
-    animation: suggestion 2s forwards;
-  }
-  @keyframes suggestion {
-    0% {
-      transform: translate(0, 0);
-    }
-    50% {
-      transform: translate(5%, 0);
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
-  .weather-details {
-    margin-top: 20px;
+    background-color: rgba(15, 15, 15, 1);
   }
 
+  #root,
+  .App {
+    width: 100%;
+    height: 100%;
+    background-image: url("./assets/mobile/mobileDay.jpg");
+    background-size: cover;
+  }
+
+  .mobile {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    display: normal;
+  }
+  .desktop {
+    display: none;
+  }
+  .top-bar,
+  .footer {
+    height: 7%;
+    background-color: rgba(15, 15, 15, 0.5);
+    backdrop-filter: blur(5px);
+  }
+  .footer {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  .top-bar {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .isInDetails {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+  }
+  .details {
+    width: 100%;
+    height: 100%;
+  }
   .detail {
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 25px;
   }
   .description {
+    justify-self: flex-start;
     color: rgba(210, 210, 210, 0.75);
   }
   .quanity {
-    font-size: 1.15rem;
+    justify-self: flex-end;
+    font-size: 1.1rem;
   }
-  .weather-display {
-    margin-top: 40px;
+  #header {
+    font-size: 1.2rem;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+    border-bottom: 1px solid white;
+  }
+  .footerIsInDetails {
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+  .weather-details {
+    margin-top: 20%;
+  }
+  .top {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #temperature {
+    font-size: 6rem;
+  }
+  #city {
+    font-size: 1.5rem;
   }
 
   .weather-display {
-    animation: leftSlideIn 1.5s forwards;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
   }
-  #heading {
-    animation: leftSlideIn 3s forwards;
+
+  .middle-part {
+    height: 86%;
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  #location-icon {
+    width: 30px;
+    height: 30px;
+  }
+  #weather-icon {
+    width: 50px;
+  }
+  #temp {
+    font-size: 6rem;
+  }
+  .weather {
+    text-align: center;
+  }
+  ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .icon {
+    width: 50px;
+  }
+  #desc {
+    font-size: 2rem;
+  }
+  #weather-icon {
+    width: 50px;
+  }
+  .input {
+    background-color: rgba(0, 0, 0, 0.25);
+    position: absolute;
+    top: 100px;
+    z-index: 1;
+    width: 60%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20%;
+    border-radius: 15px;
+    animation: inputSlide 1s forwards;
+  }
+  .input input {
+    width: 70%;
+    height: 30px;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 1.25rem;
+    border-bottom: 1px solid white;
+  }
+  @keyframes inputSlide {
+    0% {
+      opacity: 0;
+      transform: translate(0, -100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+  #search-img {
+    width: 30px;
+    height: 30px;
+  }
+  #search-button {
+    width: 30px;
+    height: 30px;
+    margin-left: 15px;
+    background-color: transparent;
+  }
+  .footer-btn {
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+  }
+
+  .weather-display {
+    animation: leftSlideIn 1s forwards;
   }
   @keyframes leftSlideIn {
     0% {
       opacity: 0;
-      transform: translate(-100%);
+      transform: translate(-100%, 0);
     }
     100% {
       opacity: 1;
-      transform: translate(0%);
-    }
-  }
-  #company-name,
-  #powered-by {
-    animation: rightSlideIn 2s forwards;
-  }
-  @keyframes rightSlideIn {
-    0% {
-      opacity: 0;
-      transform: translate(100%);
-    }
-    100% {
-      opacity: 1;
-      transform: translate(0%);
+      transform: translate(0, 0);
     }
   }
 
-  .right-part {
-    animation: bottomSlideIn 2s forwards;
+  .top-bar {
+    animation: topSlideIn 1s 1 forwards;
+  }
+  @keyframes topSlideIn {
+    0% {
+      opacity: 0;
+      transform: translate(0, -100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  .footer {
+    animation: bottomSlideIn 2s 1 forwards;
   }
   @keyframes bottomSlideIn {
     0% {
@@ -459,15 +543,5 @@
       opacity: 1;
       transform: translate(0, 0);
     }
-  }
-  .right-part:focus-within {
-    transition: all 1s;
-    margin-top: -100%;
-  }
-  .quanity {
-    animation: rightSlideIn 0.5s forwards;
-  }
-  .description {
-    animation: leftSlideIn 0.5s forwards;
   }
 }

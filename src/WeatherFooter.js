@@ -7,6 +7,10 @@ import DayJPG from "./assets/day.jpg";
 import EveningJPG from "./assets/evening.jpg";
 import MorningJPG from "./assets/morning.jpg";
 import NightJPG from "./assets/night.jpg";
+import MorningMobile from "./assets/mobile/mobileMorning.jpg";
+import EveningMobile from "./assets/mobile/mobileEvening.jpg";
+import DayMobile from "./assets/mobile/mobileDay.jpg";
+import NightMobile from "./assets/mobile/mobileNight.jpg";
 
 const WeatherFooter = (props) => {
   const { temperature, location, weather, date } = props;
@@ -80,17 +84,34 @@ const WeatherFooter = (props) => {
   // Evening 17:00 22:00
 
   const handleBackgroundChange = () => {
+    const windowWidth = window.screen.width;
     if (hours >= 6 && hours < 12) {
-      appDoc.style.backgroundImage = `url(${MorningJPG})`;
+      if (windowWidth <= 450) {
+        appDoc.style.backgroundImage = `url(${MorningMobile})`;
+      } else {
+        appDoc.style.backgroundImage = `url(${MorningJPG})`;
+      }
     }
     if (hours >= 12 && hours < 17) {
-      appDoc.style.backgroundImage = `url(${DayJPG})`;
+      if (windowWidth <= 450) {
+        appDoc.style.backgroundImage = `url(${DayMobile})`;
+      } else {
+        appDoc.style.backgroundImage = `url(${DayJPG})`;
+      }
     }
     if (hours >= 17 && hours < 22) {
-      appDoc.style.backgroundImage = `url(${EveningJPG})`;
+      if (windowWidth <= 450) {
+        appDoc.style.backgroundImage = `url(${EveningMobile})`;
+      } else {
+        appDoc.style.backgroundImage = `url(${EveningJPG})`;
+      }
     }
     if (hours >= 22 || hours < 6) {
-      appDoc.style.backgroundImage = `url(${NightJPG})`;
+      if (windowWidth <= 450) {
+        appDoc.style.backgroundImage = `url(${NightMobile})`;
+      } else {
+        appDoc.style.backgroundImage = `url(${NightJPG})`;
+      }
     }
   };
 
