@@ -21,5 +21,9 @@
 </div>
 
 ###
+
 ![Weatherapp](https://github.com/pietras333/weather-app-react/assets/83142069/64e25717-59af-4c1a-b743-f572a0c73504)
 
+###
+
+![Weatherapp1](https://github.com/pietras333/weather-app-react/assets/83142069/7f5245a9-2d4e-446b-be05-5d7b2b541942)
